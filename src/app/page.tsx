@@ -194,7 +194,7 @@ export default function Home() {
         </h1>
       </header>
 
-      <main className="p-8">
+      <main className="py-10 px-20">
         <div className="grid gap-8">
           <div className="grid md:grid-cols-4 gap-8">
             <Card className="bg-gray-100 shadow-md">
