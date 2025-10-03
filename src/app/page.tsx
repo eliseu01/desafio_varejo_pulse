@@ -36,18 +36,9 @@ export default function Home() {
   const [topProduct, setTopProduct] = useState('-');
   const [loading, setLoading] = useState(false);
 
-  // Novos estados para notificações e erros
   const [notifications, setNotifications] = useState<Omit<NotificationType, 'onClose'>[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
-  // State for CRUD operations
-  const [clientName, setClientName] = useState('');
-  const [clientId, setClientId] = useState('');
-  const [productName, setProductName] = useState('');
-  const [productValue, setProductValue] = useState('');
-  const [productId, setProductId] = useState('');
-
-  // Funções de notificação
   const addNotification = (message: string, type: NotificationType['type']) => {
     setNotifications(prev => [...prev, { id: Date.now(), message, type }]);
   };
@@ -74,87 +65,6 @@ export default function Home() {
       addNotification("Erro ao enviar arquivo.", 'error');
     }
   }
-
-  // Funções CRUD com validação e notificações
-  async function createClient() {
-    if (!clientName.trim()) {
-      setErrors(prev => ({ ...prev, clientName: true }));
-      addNotification('O nome do cliente é obrigatório.', 'error');
-      return;
-    }
-    try {
-      await fetch(`${API_BASE}/client`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: clientName }),
-      });
-      addNotification('Cliente criado!', 'success');
-      setClientName('');
-    } catch (error) {
-      addNotification('Erro ao criar cliente.', 'error');
-      console.error("Erro ao criar cliente:", error);
-    }
-  }
-
-  async function updateClient() {
-     if (!clientId.trim() || !clientName.trim()) {
-      setErrors(prev => ({ ...prev, clientId: !clientId.trim(), clientName: !clientName.trim() }));
-      addNotification('ID e Nome do cliente são obrigatórios.', 'error');
-      return;
-    }
-    try {
-      await fetch(`${API_BASE}/client/${clientId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: clientName }),
-      });
-      addNotification('Cliente atualizado!', 'success');
-      setClientId('');
-      setClientName('');
-    } catch (error) {
-      addNotification('Erro ao atualizar cliente.', 'error');
-      console.error("Erro ao atualizar cliente:", error);
-    }
-  }
-
-  async function deleteClient() {
-    if (!clientId.trim()) {
-      setErrors(prev => ({ ...prev, deleteClientId: true }));
-      addNotification('O ID do cliente é obrigatório para deletar.', 'error');
-      return;
-    }
-    try {
-      await fetch(`${API_BASE}/client/${clientId}`, { method: 'DELETE' });
-      addNotification('Cliente deletado!', 'success');
-      setClientId('');
-    } catch (error) {
-      addNotification('Erro ao deletar cliente.', 'error');
-      console.error("Erro ao deletar cliente:", error);
-    }
-  }
-
-  async function createProduct() {
-     if (!productName.trim() || !productValue.trim()) {
-      setErrors(prev => ({ ...prev, productName: !productName.trim(), productValue: !productValue.trim() }));
-      addNotification('Nome e Valor do produto são obrigatórios.', 'error');
-      return;
-    }
-    try {
-      await fetch(`${API_BASE}/product`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: productName, valor_unitario: parseFloat(productValue) }),
-      });
-      addNotification('Produto criado!', 'success');
-      setProductName('');
-      setProductValue('');
-    } catch (error) {
-      addNotification('Erro ao criar produto.', 'error');
-      console.error("Erro ao criar produto:", error);
-    }
-  }
-
-  // ... Implemente a mesma lógica de validação para updateProduct e deleteProduct
 
   return (
     <div className="bg-white text-gray-800 min-h-screen">
