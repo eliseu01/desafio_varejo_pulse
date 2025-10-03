@@ -196,23 +196,7 @@ export default function Home() {
 
       <main className="p-8">
         <div className="grid gap-8">
-          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <Upload className="mr-2" /> Upload de Arquivo .dat
-            </h2>
-            <div className="flex items-center">
-              <input
-                type="file"
-                id="datFile"
-                className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-l-md p-2"
-              />
-              <button onClick={uploadDat} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md">
-                Enviar
-              </button>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             <Card className="bg-gray-100 shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg font-medium text-blue-600">
@@ -246,6 +230,21 @@ export default function Home() {
                 <div className="text-2xl font-bold">{topProduct}</div>
               </CardContent>
             </Card>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+              <h2 className="text-lg font-semibold mb-4 flex items-center">
+                <Upload className="mr-2" /> Upload de Arquivo .dat
+              </h2>
+              <div className="flex items-center">
+                <input
+                  type="file"
+                  id="datFile"
+                  className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-l-md p-2"
+                />
+                <button onClick={uploadDat} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md">
+                  Enviar
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
