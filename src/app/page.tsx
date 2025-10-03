@@ -187,16 +187,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
-      <header className="bg-gray-800 p-4 shadow-md">
-        <h1 className="text-2xl font-bold text-center text-blue-400">
+    <div className="bg-white text-gray-800 min-h-screen">
+      <header className="bg-gray-100 p-4 shadow-md">
+        <h1 className="text-2xl font-bold text-center text-blue-600">
           📊 Relatório de Vendas - Varejo Rápido
         </h1>
       </header>
 
       <main className="p-8">
         <div className="grid gap-8">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
               <Upload className="mr-2" /> Upload de Arquivo .dat
             </h2>
@@ -204,7 +204,7 @@ export default function Home() {
               <input
                 type="file"
                 id="datFile"
-                className="flex-grow bg-gray-700 text-white border border-gray-600 rounded-l-md p-2"
+                className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-l-md p-2"
               />
               <button onClick={uploadDat} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md">
                 Enviar
@@ -213,34 +213,34 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gray-800 shadow-lg">
+            <Card className="bg-gray-100 shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-400">
+                <CardTitle className="text-lg font-medium text-blue-600">
                   Total de Vendas
                 </CardTitle>
-                <DollarSign className="h-4 w-4 text-gray-400" />
+                <DollarSign className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{`R$${totalSales.toFixed(2)}`}</div>
               </CardContent>
             </Card>
-            <Card className="bg-gray-800 shadow-lg">
+            <Card className="bg-gray-100 shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-400">
+                <CardTitle className="text-lg font-medium text-blue-600">
                   Cliente Top
                 </CardTitle>
-                <User className="h-4 w-4 text-gray-400" />
+                <User className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{topClient}</div>
               </CardContent>
             </Card>
-            <Card className="bg-gray-800 shadow-lg">
+            <Card className="bg-gray-100 shadow-md">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-400">
+                <CardTitle className="text-lg font-medium text-blue-600">
                   Produto + Vendido
                 </CardTitle>
-                <ShoppingCart className="h-4 w-4 text-gray-400" />
+                <ShoppingCart className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{topProduct}</div>
@@ -248,30 +248,30 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
               <BarChart className="mr-2" /> Gráfico de Vendas
             </h2>
-            <div className="h-64 bg-gray-700 rounded-md">
+            <div className="h-96 w-full">
               <SalesChart sales={sales} />
             </div>
           </div>
 
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
               <div className="relative flex-grow">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Buscar Cliente ou Produto"
-                  className="bg-gray-700 text-white border border-gray-600 rounded-md p-2 pl-10 w-full"
+                  className="bg-white text-gray-800 border border-gray-300 rounded-md p-2 pl-10 w-full"
                   onInput={(e) => loadSales((e.target as HTMLInputElement).value)}
                 />
               </div>
             </div>
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b border-gray-700">
+                <tr className="border-b border-gray-300">
                   <th className="p-2">Data</th>
                   <th className="p-2">Cliente</th>
                   <th className="p-2">Produto</th>
@@ -282,7 +282,7 @@ export default function Home() {
               </thead>
               <tbody>
                 {sales.map(sale => (
-                  <tr key={sale.id} className="border-b border-gray-700">
+                  <tr key={sale.id} className="border-b border-gray-300">
                     <td className="p-2">{new Date(sale.data).toLocaleDateString()}</td>
                     <td className="p-2">{sale.cliente.nome}</td>
                     <td className="p-2">{sale.produto.nome}</td>
@@ -296,17 +296,17 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold mb-4">Gerenciar Clientes</h2>
               <div className="space-y-4">
                 <div className="flex gap-2">
-                  <input value={clientName} onChange={(e) => setClientName(e.target.value)} type="text" placeholder="Nome do cliente" className="flex-grow bg-gray-700 text-white border border-gray-600 rounded-md p-2" />
+                  <input value={clientName} onChange={(e) => setClientName(e.target.value)} type="text" placeholder="Nome do cliente" className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-md p-2" />
                   <button onClick={createClient} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center">
                     <Plus className="mr-2 h-4 w-4" /> Adicionar
                   </button>
                 </div>
                 <div className="flex gap-2">
-                  <input value={clientId} onChange={(e) => setClientId(e.target.value)} type="number" placeholder="ID para editar/deletar" className="flex-grow bg-gray-700 text-white border border-gray-600 rounded-md p-2" />
+                  <input value={clientId} onChange={(e) => setClientId(e.target.value)} type="number" placeholder="ID para editar/deletar" className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-md p-2" />
                   <button onClick={updateClient} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md flex items-center">
                     <Edit className="mr-2 h-4 w-4" /> Editar
                   </button>
@@ -317,18 +317,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold mb-4">Gerenciar Produtos</h2>
               <div className="space-y-4">
                 <div className="flex gap-2">
-                  <input value={productName} onChange={(e) => setProductName(e.target.value)} type="text" placeholder="Nome do produto" className="flex-grow bg-gray-700 text-white border border-gray-600 rounded-md p-2" />
-                  <input value={productValue} onChange={(e) => setProductValue(e.target.value)} type="number" placeholder="Valor unitário" className="bg-gray-700 text-white border border-gray-600 rounded-md p-2" />
+                  <input value={productName} onChange={(e) => setProductName(e.target.value)} type="text" placeholder="Nome do produto" className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-md p-2" />
+                  <input value={productValue} onChange={(e) => setProductValue(e.target.value)} type="number" placeholder="Valor unitário" className="bg-white text-gray-800 border border-gray-300 rounded-md p-2" />
                   <button onClick={createProduct} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center">
                     <Plus className="mr-2 h-4 w-4" /> Adicionar
                   </button>
                 </div>
                 <div className="flex gap-2">
-                  <input value={productId} onChange={(e) => setProductId(e.target.value)} type="number" placeholder="ID para editar/deletar" className="flex-grow bg-gray-700 text-white border border-gray-600 rounded-md p-2" />
+                  <input value={productId} onChange={(e) => setProductId(e.target.value)} type="number" placeholder="ID para editar/deletar" className="flex-grow bg-white text-gray-800 border border-gray-300 rounded-md p-2" />
                   <button onClick={updateProduct} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md flex items-center">
                     <Edit className="mr-2 h-4 w-4" /> Editar
                   </button>
